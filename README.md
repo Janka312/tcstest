@@ -37,7 +37,7 @@ Este proyecto es una API RESTful desarrollada como parte de la prueba técnica p
 ### 1. Clonar el repositorio
 
 ```bash
-git clone https://github.com/tu-usuario/tcstest.git
+git clone https://github.com/Janka312/tcstest.git
 cd tcstest
 ```
 
