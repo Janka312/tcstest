@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  app:
+    image: tcstest:latest
+    build:
+      context: .
+    container_name: tcstest-app
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/db_postgres
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=code
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    ports:
+      - "8080:8080"
+    networks:
+      - spring-net
+
+  db:
+    image: postgres:13.1-alpine
+    container_name: tcstest-db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=code
+      - POSTGRES_DB=db_postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - spring-net
+
+networks:
+  spring-net:
+    driver: bridge
+
+volumes:
+  postgres_data:
+    driver: local
